@@ -1,0 +1,9 @@
+# Npm 
+node_modules/
+**/node_modules/
+npm-debug.log
+**/.vscode/
+
+#frontend
+frontend/.angular/
+
