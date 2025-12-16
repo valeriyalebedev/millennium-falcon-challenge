@@ -12,9 +12,9 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2022",
-    "module": "es2022",
-    "moduleResolution": "node"
+    "module": "nodenext",
+    "target": "esnext",
+    "types": ["node"],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

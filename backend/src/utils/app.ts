@@ -1,5 +1,5 @@
 import express from 'express'
-import router from './modules/odds/odds.router'
+import router from '../modules/odds/odds.router.js'
 
 const app = express()
 app.use(express.json())

@@ -9,8 +9,10 @@
     "cli"
   ],
   "scripts": {
-    "dev": "concurrently \"npm:dev:*\"",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:debug": "concurrently \"npm run dev:backend:debug\" \"npm run dev:frontend\"",
     "dev:backend": "npm --prefix backend run dev",
+    "dev:backend:debug": "npm --prefix backend run dev:debug",
     "dev:frontend": "npm --prefix frontend start",
     "test": "npm run test:backend && npm run test:frontend && npm run test:cli",
     "test:backend": "npm --prefix backend test",
@@ -28,12 +30,14 @@
   "keywords": [],
   "author": "Valeriya Lebedev <lebedev.valeriya@gmail.com>",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/valeriya13/millennium-falcon-challenge/issues"
   },
   "homepage": "https://github.com/valeriya13/millennium-falcon-challenge#readme",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.0.2",
     "concurrently": "^9.2.1",
     "tsx": "^4.21.0"
   }

@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch src/utils/server.ts",
+    "dev:debug": "NODE_OPTIONS='--inspect' tsx watch src/utils/server.ts",
     "test": "jest --passWithNoTests",
     "build": "tsc"
   },
@@ -14,12 +16,15 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
-    "@types/node": "^25.0.0",
+    "@types/node": "^25.0.2",
     "@types/supertest": "^6.0.3",
     "jest": "^30.2.0",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.5.0"
   }
 }

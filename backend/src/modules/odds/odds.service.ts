@@ -8,7 +8,17 @@ import { State } from "./models/state.model.js";
  * @returns probability percentage of being captured
  */
 export function captureProbability(k: number): number {
-  return Math.round(Math.pow(0.9, k) * 100);
+  //return Math.round(Math.pow(0.9, k) * 100);
+
+  let probability = 0;
+  for (let i =1; i<=k;i++){
+    //chances of being captured at the i-th encounter
+    probability += Math.pow(9/10,i-1)*0.1
+  }
+
+  //chances of not being captured
+  return Math.round((1-probability) * 100);
+
 }
 
 export function computeOdds(
@@ -71,9 +81,9 @@ export function computeOdds(
       day += travelDays;
       fuel -= travelDays;
 
-      if(day>countdown){
+      if (day > countdown) {
         continue;
-      } 
+      }
 
       //bounty hunters on arrival check
       if (bountyHunters.isPresent(nextPlanet, day)) {

@@ -1,5 +1,9 @@
 import type { Planet } from "./route-map.model.js";
 
+/**
+ * Each state of the journey is defined by the current planet, day, remaining fuel, and number of hunters encountered
+ * 
+ */
 export class State{
     constructor(
         public readonly planet: Planet,
