@@ -38,5 +38,9 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+
+    //Types
+    "typeRoots": [".node_modules/@types", "./src/types"]
+
     }
 }

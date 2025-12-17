@@ -1,6 +1,5 @@
-import { RouteMap } from "../../modules/odds/models/route-map.model";
 import Database from "better-sqlite3";
-
+import { RouteMap } from "../../modules/odds/models/route-map.model.js";
 interface RouteRow {
     origin: string;
     destination: string;
