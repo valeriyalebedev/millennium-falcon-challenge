@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
-import { computeOdds } from "./odds.service.js";
 import app from "../../utils/app.js";
+import { computeOdds } from "core";
+import { coreLogger } from "../../utils/core-logger.adapter.js";
 
 export function calculateOdds(req: Request, res: Response) {
   const { bountyHunters, countdown } = req.body;
@@ -11,7 +12,8 @@ export function calculateOdds(req: Request, res: Response) {
     bountyHunters,
     app.locals.config.departure,
     app.locals.config.arrival,
-    countdown
+    countdown,
+    coreLogger
   );
   res.json({ odds });
 }

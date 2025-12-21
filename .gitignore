@@ -11,3 +11,8 @@ frontend/.angular/
 *.log
 */logs/
 
+dist
+*.js
+*.map
+*.d.ts
+*.tsbuildinfo

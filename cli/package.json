@@ -1,23 +1,23 @@
 {
   "name": "cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "ts-node-dev src/cli.ts",
-    "test": "jest --passWithNoTests",
-    "build": "tsc"
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "give-me-the-odds": "dist/cli.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "cli": "ts-node-esm src/cli.ts"
+  },
+  "dependencies": {
+    "better-sqlite3": "^8.0.0",
+    "core": "*"
+  },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "@types/node": "^25.0.0",
-    "jest": "^30.2.0",
-    "ts-jest": "^29.4.6",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.9.3"
+    "@types/node": "^25.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }

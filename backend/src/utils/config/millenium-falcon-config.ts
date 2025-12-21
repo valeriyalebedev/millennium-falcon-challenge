@@ -1,21 +1,15 @@
 import path from "path";
 import fs, { cp } from "fs";
 import { fileURLToPath } from "url";
-
-export interface Config {
-  autonomy: number;
-  departure: string;
-  arrival: string;
-  routes_db: string;
-}
+import { MilleniumFalconConfig } from '../../../../core/src/models/millenium-falcon-config.model.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export function loadConfig(): Config {
+export function loadConfig(): MilleniumFalconConfig{
   const configPath = path.resolve(__dirname, "./millennium-falcon.json");
   const raw = fs.readFileSync(configPath, "utf-8");
-  const config = JSON.parse(raw) as Config;
+  const config = JSON.parse(raw) as MilleniumFalconConfig;
 
   config.routes_db = path.resolve(__dirname, config.routes_db);
 

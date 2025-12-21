@@ -1,7 +1,7 @@
 import express from "express";
 import router from "../modules/odds/odds.router.js";
-import { loadConfig } from "./config/config.js";
-import { loadRouteMap } from "./config/load-route-map.js";
+import { loadConfig } from "./config/millenium-falcon-config.js";
+import { loadRouteMap } from "core";
 import logger from "./logger.js";
 
 const app = express();

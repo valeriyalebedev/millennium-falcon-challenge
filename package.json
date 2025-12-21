@@ -4,6 +4,7 @@
   "description": "Millenium falcon challenge solution",
   "main": "index.js",
   "workspaces": [
+    "core",
     "backend",
     "frontend",
     "cli"
@@ -11,17 +12,18 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:debug": "concurrently \"npm run dev:backend:debug\" \"npm run dev:frontend\"",
-    "dev:backend": "npm --prefix backend run dev",
-    "dev:backend:debug": "npm --prefix backend run dev:debug",
+    "dev:backend": "tsx watch backend/src/utils/server.ts",
+    "dev:backend:debug": "tsx watch backend/src/utils/server.ts --inspect",
     "dev:frontend": "npm --prefix frontend start",
     "test": "npm run test:backend && npm run test:frontend && npm run test:cli",
     "test:backend": "npm --prefix backend test",
     "test:frontend": "npm --prefix frontend test",
     "test:cli": "npm --prefix cli test",
-    "build": "npm run build:backend && npm run build:frontend && npm run build:cli",
-    "build:backend": "npm --prefix backend build",
-    "build:frontend": "npm --prefix frontend build",
-    "build:cli": "npm --prefix cli build"
+    "build": "tsc -b core backend frontend cli",
+    "builde:core": "tsc -b core",
+    "build:backend": "tsc -backend",
+    "build:frontend": "tsc -b frontend",
+    "build:cli": "tsc -b cli"
   },
   "repository": {
     "type": "git",
