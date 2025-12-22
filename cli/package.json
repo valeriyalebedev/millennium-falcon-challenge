@@ -7,9 +7,9 @@
     "give-me-the-odds": "dist/cli.js"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "node dist/cli.js",
-    "cli": "ts-node-esm src/cli.ts"
+    "cli": "tsx src/cli.ts"
   },
   "dependencies": {
     "better-sqlite3": "^8.0.0",

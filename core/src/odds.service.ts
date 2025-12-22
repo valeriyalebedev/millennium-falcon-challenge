@@ -34,13 +34,12 @@ export function captureProbability(k: number): number {
 export function computeOdds(
   routes: RouteMap,
   autonomy: number,
-  bountyData: Record<Planet, Record<number, boolean>>,
+  bountyHunters: BountyHunters,
   departure: Planet,
   arrival: Planet,
   countdown: number,
   logger: Logger = noopLogger
 ): number {
-  const bountyHunters = new BountyHunters(bountyData);
 
   //initialize the search queue
   const queue: State[] = [];
