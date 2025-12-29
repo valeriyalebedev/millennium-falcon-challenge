@@ -1,7 +1,7 @@
 import path from "path";
-import fs, { cp } from "fs";
+import fs from "fs";
 import { fileURLToPath } from "url";
-import { MilleniumFalconConfig } from '../../../../core/src/models/millenium-falcon-config.model.js';
+import { MilleniumFalconConfig } from 'core';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

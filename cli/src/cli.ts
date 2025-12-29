@@ -2,9 +2,8 @@
 
 import path from "path"
 import fs from 'fs';
-import { loadRouteMap } from 'core';
+import { BountyHunters, loadRouteMap } from 'core';
 import { MilleniumFalconConfig } from 'core';
-import { loadBountyHunters } from 'core';
 import { computeOdds } from 'core';
 import { validateEmpireConfig } from 'core';
 import { validateMilenniumFalconConfig } from 'core';
@@ -87,7 +86,8 @@ const routesDBPath = path.resolve(path.dirname(falconFile), milleniumFalconConfi
 
 const routes = loadRouteMap(routesDBPath);
 
-const bountyHunters = loadBountyHunters(empireData.bounty_hunters);
+const bountyHunters = new BountyHunters(empireData.bounty_hunters);
+
 const countDown = empireData.countdown;
 
 //Calculate odds

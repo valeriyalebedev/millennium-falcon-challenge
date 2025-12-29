@@ -1,7 +1,7 @@
 import { RouteMap, type Planet } from "./models/route-map.model.js";
 import { State } from "./models/state.model.js";
-import { BountyHunters } from './models/bounty-hunters.model.js';
-import { Logger, noopLogger } from './utils/logger.js';
+import { BountyHunters } from "./models/bounty-hunters.model.js";
+import { Logger, noopLogger } from "./utils/logger.js";
 
 /**
  * Calculate the probability of Millenium Falcon being captured based on the k which corresponds to the number of bounty hounters encountered
@@ -40,7 +40,6 @@ export function computeOdds(
   countdown: number,
   logger: Logger = noopLogger
 ): number {
-
   //initialize the search queue
   const queue: State[] = [];
   //track visited planets to avoid cycles
@@ -168,5 +167,12 @@ export function computeOdds(
   logger.info(
     `     Minimum bounty hunters encountered on successful path: ${minHunters}`
   );
-  return captureProbability(minHunters);
+
+  const result = captureProbability(minHunters);
+
+  logger.info(`
+  Probability of safe arrival with ${minHunters} bounty hunters encountered: ${result}%
+  `);
+
+  return result;
 }

@@ -1,26 +1,34 @@
 import { createLogger, format, transports } from "winston";
+import path from "path";
+import fs from "fs";
 
-const { combine, timestamp, printf, json } = format;
+const { combine, timestamp, printf } = format;
 
-//Define log format based on environment
-//DEV format
-const devFormat = combine(
+//Define log format
+const logFormat = combine(
   timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
   printf(({ timestamp, level, message }) => `${timestamp}: [${level}] ${message}`)
 );
 
-//PROD format
-const prodFormat = combine(
-  timestamp(),
-  json()
+// create logs folder if it doesn't exist
+const logsDir = path.resolve(process.cwd(), "logs");
+
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
+}
+
+const logFilePath = path.resolve(
+  process.cwd(),
+  "logs",
+  "onboard_computer.log"
 );
 
 const logger = createLogger({
-  level: process.env.LOG_LEVEL || "info",
-  format: process.env.NODE_ENV === "production" ? prodFormat : devFormat,
+  level: "info",
+  format: logFormat,
   transports: [
-    new transports.Console({level: 'info'}),
-    new transports.File({ filename: './logs/onboard_computer.log', level: 'debug' }) 
+    new transports.Console({level: "info"}),
+    new transports.File({ filename: logFilePath, level: "debug" }) 
   ],
 });
 
