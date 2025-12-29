@@ -10,8 +10,11 @@
             "import": "./dist/index.js"
         }
     },
+    "devDependencies": {
+        "vitest": "^4.0.16"
+    },
     "scripts": {
         "build": "tsc -b",
-        "test": "jest --passWithNoTests"
+        "test": "vitest run"
     }
 }

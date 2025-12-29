@@ -3,6 +3,10 @@ import type { Planet } from "./route-map.model.js";
 type BountyArray = { planet: Planet; day: number }[];
 type BountyRecord = Record<Planet, Record<number, boolean>>;
 
+export interface IBountyHunters {
+  isPresent(planet: string, day: number): boolean;
+}
+
 export class BountyHunters {
   private readonly data: Record<Planet, Record<number, boolean>> = {};
 

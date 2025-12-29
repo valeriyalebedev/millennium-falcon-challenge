@@ -1,6 +1,6 @@
-import { RouteMap, type Planet } from "./models/route-map.model.js";
+import { type Planet, IRouteMap } from "./models/route-map.model.js";
 import { State } from "./models/state.model.js";
-import { BountyHunters } from "./models/bounty-hunters.model.js";
+import { IBountyHunters } from "./models/bounty-hunters.model.js";
 import { Logger, noopLogger } from "./utils/logger.js";
 
 /**
@@ -32,9 +32,9 @@ export function captureProbability(k: number): number {
  * @returns probability percentage of safe arrival
  */
 export function computeOdds(
-  routes: RouteMap,
+  routes: IRouteMap,
   autonomy: number,
-  bountyHunters: BountyHunters,
+  bountyHunters: IBountyHunters,
   departure: Planet,
   arrival: Planet,
   countdown: number,

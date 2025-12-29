@@ -1,10 +1,22 @@
-import express from "express";
+import express, { ErrorRequestHandler, Request, Response } from "express";
 import router from "../modules/odds/odds.router.js";
 import { loadConfig } from "./config/millenium-falcon-config.js";
 import { loadRouteMap } from "core";
 import logger from "./logger.js";
+import { setupSwagger } from "./swagger.js";
 
 const app = express();
+
+app.use(express.json());
+
+app.get("/", (req: Request, res: Response) => res.send("OK"));
+
+const jsonErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
+    if (err instanceof SyntaxError && 'body' in err) {
+      return res.status(400).json({ error: "Invalid JSON" });
+    }
+    next(err);
+  };
 
 //Loading configuration
 const config = loadConfig();
@@ -26,5 +38,10 @@ ${JSON.stringify(routeMap.routesData)}
 app.use(express.json());
 
 app.use("/api/odds", router);
+
+//Swagger UI is available at http://localhost:3000/api/docs
+setupSwagger(app);
+
+app.use(jsonErrorHandler);
 
 export default app;
