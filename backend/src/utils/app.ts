@@ -9,14 +9,17 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => res.send("OK"));
-
 const jsonErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     if (err instanceof SyntaxError && 'body' in err) {
       return res.status(400).json({ error: "Invalid JSON" });
     }
     next(err);
   };
+
+app.use(jsonErrorHandler);
+
+//Health check
+app.get("/", (req: Request, res: Response) => res.send("OK"));
 
 //Loading configuration
 const config = loadConfig();
@@ -35,13 +38,9 @@ Route map loaded:
 ${JSON.stringify(routeMap.routesData)}
 `);
 
-app.use(express.json());
-
 app.use("/api/odds", router);
 
 //Swagger UI is available at http://localhost:3000/api/docs
 setupSwagger(app);
-
-app.use(jsonErrorHandler);
 
 export default app;

@@ -15,22 +15,27 @@ import { coreLogger } from "../../utils/core-logger.adapter.js";
  *         application/json:
  *           schema:
  *             type: object
+ *             required:
+ *               - bounty_hunters
+ *               - countdown
  *             properties:
  *               bounty_hunters:
- *                 type: object
- *                 additionalProperties:
+ *                 type: array
+ *                 items:
  *                   type: object
- *                   additionalProperties:
- *                     type: boolean
+ *                   required:
+ *                     - planet
+ *                     - day
+ *                   properties:
+ *                     planet:
+ *                       type: string
+ *                       example: Hoth
+ *                     day:
+ *                       type: number
+ *                       example: 6
  *               countdown:
  *                 type: number
- *             example:
- *               bounty_hunters:
- *                 Hoth:
- *                   "6": true
- *                   "7": true
- *                   "8": true
- *               countdown: 8
+ *                 example: 8
  *     responses:
  *       200:
  *         description: Odds calculated successfully
@@ -51,9 +56,13 @@ export function calculateOdds(req: Request, res: Response) {
   const { bounty_hunters, countdown } = req.body;
 
   if (
-    !bounty_hunters || 
-    typeof bounty_hunters !== "object" || 
-    Array.isArray(bounty_hunters) || 
+    !Array.isArray(bounty_hunters) ||
+    bounty_hunters.some(
+      bh =>
+        typeof bh !== "object" ||
+        typeof bh.planet !== "string" ||
+        typeof bh.day !== "number"
+    ) ||
     typeof countdown !== "number"
   ) {
     return res.status(400).json({ error: "Invalid configuration" });
