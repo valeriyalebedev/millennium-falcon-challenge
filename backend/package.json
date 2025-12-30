@@ -24,7 +24,9 @@
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.6",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.9.3"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   },
   "dependencies": {
     "better-sqlite3": "^12.5.0",

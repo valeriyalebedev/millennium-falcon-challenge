@@ -1,76 +1,73 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { calculateOdds } from "./odds.controller.js";
-import app from "../../utils/app.js";
-import * as core from "core";
+import { calculateOdds } from "./odds.controller";
+import * as core from 'core';
 
-describe("calculateOdds controller", () => {
-  let mockReq: any;
-  let mockRes: any;
 
-  beforeEach(() => {
-    // Mock request and response
-    mockReq = { body: {} };
-    mockRes = {
-      json: vi.fn(),
-      status: vi.fn(() => mockRes),
-    };
-
-    app.locals.routeMap = {
-    };
-    app.locals.config = {
+// Мокаем app.locals для тестов
+const mockApp = {
+  locals: {
+    routeMap: {}, // пустой маршрут
+    config: {
       autonomy: 6,
       departure: "Tatooine",
       arrival: "Endor",
-    };
+    },
+  },
+};
+
+function callController(body: any) {
+  const mockReq = { body };
+  const mockRes = {
+    status: vi.fn(() => mockRes),
+    json: vi.fn(),
+  };
+
+  // bind app к this
+  calculateOdds.call(mockApp, mockReq, mockRes);
+  return mockRes;
+}
+
+describe("calculateOdds controller", () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
   });
 
   it("should return 400 if body is invalid", () => {
-    mockReq.body = { bounty_hunters: [] };
-
-    calculateOdds(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(400);
-    expect(mockRes.json).toHaveBeenCalledWith({
+    const res = callController({ bounty_hunters: [] });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
       error: "Invalid configuration",
     });
   });
 
   it("should return 500 if computeOdds throws", () => {
-    mockReq.body = {
-      bounty_hunters: { Hoth: { "6": true } },
+    const spy = vi.spyOn(core, "computeOdds").mockImplementation(() => {
+      throw new Error("fail");
+    });
+
+    const res = callController({
+      bounty_hunters: [{ planet: "Hoth", day: 6 }],
       countdown: 7,
-    };
+    });
 
-    // Mock BountyHunters and computeOdds
-    const computeOddsMock = vi
-      .spyOn(core, "computeOdds")
-      .mockImplementation(() => {
-        throw new Error("fail");
-      });
-
-    calculateOdds(mockReq, mockRes);
-
-    expect(mockRes.status).toHaveBeenCalledWith(500);
-    expect(mockRes.json).toHaveBeenCalledWith({
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
       error: "Internal server error",
     });
 
-    computeOddsMock.mockRestore();
+    spy.mockRestore();
   });
 
   it("should return odds when body is valid", () => {
-    mockReq.body = {
-      bounty_hunters: { Hoth: { "6": true } },
+    const spy = vi.spyOn(core, "computeOdds").mockReturnValue(80);
+
+    const res = callController({
+      bounty_hunters: [{ planet: "Hoth", day: 6 }],
       countdown: 7,
-    };
+    });
 
-    // Mock computeOdds
-    const computeOddsMock = vi.spyOn(core, "computeOdds").mockReturnValue(80);
+    expect(res.json).toHaveBeenCalledWith({ odds: 80 });
 
-    calculateOdds(mockReq, mockRes);
-
-    expect(mockRes.json).toHaveBeenCalledWith({ odds: 80 });
-
-    computeOddsMock.mockRestore();
+    spy.mockRestore();
   });
 });
