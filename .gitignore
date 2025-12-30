@@ -1,0 +1,18 @@
+# Npm 
+node_modules/
+**/node_modules/
+npm-debug.log
+**/.vscode/
+
+#frontend
+frontend/.angular/
+
+# Logs
+*.log
+*/logs/
+
+dist
+*.js
+*.map
+*.d.ts
+*.tsbuildinfo

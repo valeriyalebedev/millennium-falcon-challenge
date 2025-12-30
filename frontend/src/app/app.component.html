@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="c3po">
+    <img src="assets/c3po.png" alt="C-3PO" />
+  </div>
+  <h3>Oh dear! The Empire is advancing rapidly! Please upload the intercepted data (empire.json) so that I may calculate
+    the probability of the Millennium Falcon reaching Endor safely. <br> Your assistance is vital, Master!</h3>
+
+  <input type="file" accept=".json" hidden #fileInput (change)="onFileSelected($event)" />
+
+  <button mat-raised-button color="primary" (click)="fileInput.click()">
+    Upload empire.json
+  </button>
+
+  <button mat-raised-button color="accent" class="computeBtn" [disabled]="!empireData || loading"
+    (click)="calculateOdds()">
+    Calculate odds
+  </button>
+
+  @if(loading){
+  <div class="overlay">
+    <mat-progress-spinner diameter="40" class="spinner" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+  }
+
+  @if(odds !== null){
+  <h3>
+    Probability of success:
+    <strong class="probability" [ngClass]="oddsLevel">{{ odds }}%</strong>
+  </h3>
+  <div>
+    @switch (oddsLevel) {
+      @case ('high') {
+        <p>The Millennium Falcon has a high chance of reaching Endor safely! <br />May the Force be with you!</p>
+      }
+      @case ('medium') {
+        <p>The odds are moderate. Stay vigilant and may luck be on your side!</p>
+      }
+      @case ('low') {
+        <p>I am afraid, there is no conceivable chance of reaching Endor before its destruction</p>
+      }
+    }
+  </div>
+  }
+
+  @if(error){
+  <p class="error">{{ error }}</p>
+  }
+
+</div>

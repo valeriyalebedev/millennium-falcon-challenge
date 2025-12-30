@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "0172e363-fe2e-49bb-9a47-a9c6f9df3d16",
+		"name": "Millenium falcon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "212902"
+	},
+	"item": [
+		{
+			"name": "POST odds/compute Example 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"countdown\": 7, \n  \"bounty_hunters\": [\n    {\"planet\": \"Hoth\", \"day\": 6 }, \n    {\"planet\": \"Hoth\", \"day\": 7 },\n    {\"planet\": \"Hoth\", \"day\": 8 }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		},
+		{
+			"name": "POST odds/compute Example 2",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"countdown\": 8, \n    \"bounty_hunters\": [\n      {\"planet\": \"Hoth\", \"day\": 6 }, \n      {\"planet\": \"Hoth\", \"day\": 7 },\n      {\"planet\": \"Hoth\", \"day\": 8 }\n    ]\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		},
+		{
+			"name": "POST odds/compute Example 3",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"countdown\": 9,\n    \"bounty_hunters\": [\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 6\n        },\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 7\n        },\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 8\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		},
+		{
+			"name": "POST odds/compute Example 4",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"countdown\": 10,\n    \"bounty_hunters\": [\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 6\n        },\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 7\n        },\n        {\n            \"planet\": \"Hoth\",\n            \"day\": 8\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		},
+		{
+			"name": "POST odds/compute Invalid Configuration",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bounty_hunters\": [\n    {\"planet\": \"Hoth\", \"day\": 6 }, \n    {\"planet\": \"Hoth\", \"day\": 7 },\n    {\"planet\": \"Hoth\", \"day\": 8 }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		},
+		{
+			"name": "POST odds/compute Invalid JSON",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"countdown\": 7, \n  \"bounty_hunters\": [\n    {\"planet\": \"Hoth\", \"day\": 6 }, \n    {\"planet\": \"Hoth\", \"day\": 7 },\n    {\"planet\": \"Hoth\", \"day\": 8 }\n  ]\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/odds/compute"
+			},
+			"response": []
+		}
+	]
+}

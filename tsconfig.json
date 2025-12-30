@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./core" },
+    { "path": "./backend" },
+    { "path": "./cli" }
+  ],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "node16",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
